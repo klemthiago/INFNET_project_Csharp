@@ -17,7 +17,7 @@ namespace ProjetoINFNET.UI.Web.App_Start
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
-            //Chamada dos modulos do SimpleInjector
+            //Chamada dos modulos do SimpleInjector...
             InitializeContainer(container);
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
             container.Verify();
