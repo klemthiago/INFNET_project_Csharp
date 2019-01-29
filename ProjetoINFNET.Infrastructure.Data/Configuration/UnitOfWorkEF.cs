@@ -1,4 +1,4 @@
-﻿using CommonServiceLocator;
+﻿using Microsoft.Practices.ServiceLocation;
 using ProjetoINFNET.Domain.Interfaces.Infrastructure;
 using ProjetoINFNET.Infrastructure.Data.Context;
 

@@ -12,7 +12,7 @@ namespace ProjetoINFNET.UI.Web.App_Start
 {
     public class SimpleInjectorInitializer
     {
-        public void Initialize()
+        public static void Initialize()
         {
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
@@ -24,7 +24,7 @@ namespace ProjetoINFNET.UI.Web.App_Start
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }
 
-        private void InitializeContainer(Container container)
+        private static void InitializeContainer(Container container)
         {
             Infrastructure.IoC.Bindings.Start(container);
         }

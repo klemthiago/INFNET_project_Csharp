@@ -1,14 +1,11 @@
-﻿using CommonServiceLocator;
-using ProjetoINFNET.Domain.Interfaces.Infrastructure;
+﻿using ProjetoINFNET.Domain.Interfaces.Infrastructure;
 using ProjetoINFNET.Domain.Interfaces.Repositories;
 using ProjetoINFNET.Infrastructure.Data.Configuration;
 using ProjetoINFNET.Infrastructure.Data.Context;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
+using Microsoft.Practices.ServiceLocation;
 
 namespace ProjetoINFNET.Infrastructure.Data.Repositories
 {
