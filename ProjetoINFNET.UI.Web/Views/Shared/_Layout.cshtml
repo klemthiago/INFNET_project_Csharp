@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ProjetoINFNET.UI.Web.Util
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -17,13 +18,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("RAMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("INFNET", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (SessionManager.IsAuthenticated)
+        {
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span>Olá @SessionManager.UsuarioLogado.Nome</a></li>
+            <li><a href="@Url.Action("Logoff","Account")"><span class="glyphicon glyphicon-log-in"></span>Sair</a></li>
+}
+else
+{
+            <li>@Html.ActionLink("Entrar", "Login", "Account")</li>
+}
                 </ul>
             </div>
         </div>
