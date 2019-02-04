@@ -1,4 +1,5 @@
-﻿using ProjetoINFNET.Domain.Entities;
+﻿using ProjetoDDD.Infrastructure.Data.Security;
+using ProjetoINFNET.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,38 @@ namespace ProjetoINFNET.Infrastructure.Data.Initializer
             };
 
             return perfisUsuario;
+        }
+
+        public static List<Usuario> GetUsuarios()
+        {
+            var randomString = GetRandomString();
+            var Usuarios = new List<Usuario>
+            {
+                new Usuario
+                {
+                    IdUsuario = 1,
+                    IdPerfilUsuario = 1,
+                    Nome = "Thiago Klem",
+                    Email = "tpklem@gmail.com",
+                    Senha = Crypto.EncryptStringAES("@urelio2531", randomString),
+                    DataCadastro = DateTime.Now,
+                    SenhaKey = randomString
+                }
+            };
+
+            return Usuarios;
+        }
+
+        //Uso temporário - Esta fora de contexto - Only to create AdmMaster
+        public static string GetRandomString()
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var result = new string(
+                Enumerable.Repeat(chars, 8)
+                          .Select(s => s[random.Next(s.Length)])
+                          .ToArray());
+            return result;
         }
     }
 }

@@ -11,6 +11,6 @@ namespace ProjetoINFNET.Domain.Interfaces.Repositories
     {
         Usuario RecuperarUsuarioPorEmail(string email);
         Usuario LogaUsuario(string email, string senha);
-
+        Usuario CadastraUsuario(Usuario usuario);
     }
 }

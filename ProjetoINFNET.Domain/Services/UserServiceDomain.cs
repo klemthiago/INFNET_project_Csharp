@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace ProjetoINFNET.Domain.Services
 {
-    public class UserServiceDomain : IUserServiceDomain
+    public class UserServiceDomain : ServiceDomainBase, IUserServiceDomain
     {
         private readonly IRepositoryUsuario _repositoryUsuario;
         private readonly IRepositoryPerfilUsuario _repositoryPerfil;
@@ -40,7 +40,7 @@ namespace ProjetoINFNET.Domain.Services
             return _repositoryPerfil.RecuperarTodos().Where(x => x.FlAtivo && !x.FlAdminMaster).ToList();
         }
 
-        public void CadastrarUsuario(Usuario usuario)
+        public void CadastraUsuario(Usuario usuario)
         {
             try
             {

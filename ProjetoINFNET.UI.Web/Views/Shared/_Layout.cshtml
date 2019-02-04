@@ -21,22 +21,59 @@
                 @Html.ActionLink("INFNET", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
-                </ul>
+                <div class="nav navbar-nav" style="margin-top:8px;">
+                    <div class="dropdown">
+                        @if (SessionManager.IsAuthenticated)
+                        {
+                            foreach (var modulo in SessionManager.UsuarioLogado.PerfilUsuario.ModulosAcesso.Where(x => x.IdModuloPai == null))
+                            {
+                                var temFilhos = SessionManager.UsuarioLogado.PerfilUsuario.ModulosAcesso.Where(x => x.IdModuloPai == modulo.IdModulo).Count() > 0;
+                                <a id="dLabel" role="button" data-toggle="@(temFilhos ? "dropdown":"")" class="btn btn-primary" data-target="#" href="#">
+                                    @modulo.NomeMenuAcesso
+                                    @if (temFilhos)
+                                    {
+                                        <span class="caret"></span>
+                                    }
+                                </a>
+                                if (temFilhos)
+                                {
+                                    <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                        @foreach (var moduloFilho in SessionManager.UsuarioLogado.PerfilUsuario.ModulosAcesso.Where(x => x.IdModuloPai == modulo.IdModulo))
+                                        {
+                                            var temNetos = SessionManager.UsuarioLogado.PerfilUsuario.ModulosAcesso.Where(x => x.IdModuloPai == moduloFilho.IdModulo).Count() > 0;
+                                            if (!temNetos)
+                                            {
+                                                <li><a href="@Url.Content(moduloFilho.UrlMenu)">@moduloFilho.NomeMenuAcesso</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li class="dropdown-submenu">
+                                                    <a tabindex="-1" href="#">@moduloFilho.NomeMenuAcesso</a>
+                                                    <ul class="dropdown-menu">
+                                                        @foreach (var moduloNeto in SessionManager.UsuarioLogado.PerfilUsuario.ModulosAcesso.Where(x => x.IdModuloPai == moduloFilho.IdModulo))
+                                                        {
+                                                            <li><a tabindex="-1" href="@Url.Content(moduloNeto.UrlMenu)">@moduloNeto.NomeMenuAcesso</a></li>
+                                                        }
+
+                                                    </ul>
+                                                </li>
+                                            }
+
+                                        }
+                                    </ul>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
                 <ul class="nav navbar-nav navbar-right">
                     @if (SessionManager.IsAuthenticated)
-        {
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span>Olá @SessionManager.UsuarioLogado.Nome</a></li>
-            <li><a href="@Url.Action("Logoff","Account")"><span class="glyphicon glyphicon-log-in"></span>Sair</a></li>
-}
-else
-{
-            <li>@Html.ActionLink("Entrar", "Login", "Account")</li>
-}
+                    {
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Olá @SessionManager.UsuarioLogado.Nome</a></li>
+                        <li><a href="@Url.Action("Logoff","Account")"><span class="glyphicon glyphicon-log-in"></span>Sair</a></li>
+                    } else {
+                        <li>@Html.ActionLink("Entrar", "Login", "Account")</li>
+                    }
                 </ul>
             </div>
         </div>

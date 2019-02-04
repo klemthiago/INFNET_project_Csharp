@@ -15,11 +15,15 @@ namespace ProjetoINFNET.Infrastructure.Data.Migrations
 
         protected override void Seed(Context.ContextoBanco context)
         {
-            if(context.PerfilUsuario.Where(x=> x.PerfilNome == "Administrador Master").Count() == 0)
+            //UserDatabaseInitializer.GetUsuarios().ForEach(c => context.Usuarios.Add(c));
+            if (context.PerfilUsuario.Where(x=> x.PerfilNome == "Administrador Master").Count() == 0)
+            {
                 UserDatabaseInitializer.GetPerfisUsuarios().ForEach(c => context.PerfilUsuario.Add(c));
+                //UserDatabaseInitializer.GetUsuarios().ForEach(c => context.Usuarios.Add(c));
+            }
 
             //Delete all stored procs, views
-            foreach(var file in Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug", ""), "Sql\\Seed"), "*.sql"))
+            foreach (var file in Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug", ""), "Sql\\Seed"), "*.sql"))
             {
                 context.Database.ExecuteSqlCommand(File.ReadAllText(file), new object[0]);
             }

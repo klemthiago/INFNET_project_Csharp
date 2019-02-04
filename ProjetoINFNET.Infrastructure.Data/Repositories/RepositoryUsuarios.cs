@@ -11,6 +11,12 @@ namespace ProjetoINFNET.Infrastructure.Data.Repositories
 {
     public class RepositoryUsuarios : RepositoryBase<Usuario>, IRepositoryUsuario
     {
+        public Usuario CadastraUsuario(Usuario user)
+        {
+            user.Senha = Crypto.EncryptStringAES(user.Senha, user.SenhaKey);
+            return _contexto.Usuarios.Add(user);
+        }
+
         public Usuario LogaUsuario(string email, string senha)
         {
             var usuario = _contexto.Usuarios.Where(u => u.Email == email).FirstOrDefault();
