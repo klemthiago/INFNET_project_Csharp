@@ -3,6 +3,7 @@ using ProjetoINFNET.Domain.Interfaces.Domain;
 using ProjetoINFNET.Domain.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjetoINFNET.Domain.Services
 {
@@ -32,6 +33,25 @@ namespace ProjetoINFNET.Domain.Services
         {
             var usuariosDoPerfil = _repositoryPerfil.RetornaUsuariosDoPerfil(IdPerfilUsuario);
             return usuariosDoPerfil;
+        }
+
+        public List<PerfilUsuario> RecuperaTodosPerfisAtivos()
+        {
+            return _repositoryPerfil.RecuperarTodos().Where(x => x.FlAtivo && !x.FlAdminMaster).ToList();
+        }
+
+        public void CadastrarUsuario(Usuario usuario)
+        {
+            try
+            {
+                IniciarTransacao();
+                _repositoryUsuario.CadastraUsuario(usuario);
+                PersistirTransacao();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(ex.Message);
+            }
         }
     }
 }
