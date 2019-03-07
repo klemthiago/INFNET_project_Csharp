@@ -40,10 +40,10 @@ namespace ProjetoINFNET.Infrastructure.Data.Context
             modelBuilder.Properties<string>().Where(p=> p.Name.Contains("Descricao")).Configure(p => p.HasMaxLength(400));
             modelBuilder.Properties<string>().Where(p => p.Name.Contains("UF")).Configure(p => p.HasMaxLength(2));
 
-            modelBuilder.Configurations.Add(new ModulosAcessosMap());
-            modelBuilder.Configurations.Add(new PerfilUsuarioMap());
-            modelBuilder.Configurations.Add(new UsuarioMap());
-
+            //modelBuilder.Configurations.Add(new ModulosAcessosMap());
+            //modelBuilder.Configurations.Add(new PerfilUsuarioMap());
+            //modelBuilder.Configurations.Add(new UsuarioMap());
+            Database.SetInitializer<ContextoBanco>(null);
             base.OnModelCreating(modelBuilder);
         }
     }

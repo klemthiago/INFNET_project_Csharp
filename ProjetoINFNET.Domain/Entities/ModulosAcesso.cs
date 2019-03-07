@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjetoINFNET.Domain.Entities
 {
@@ -9,6 +10,7 @@ namespace ProjetoINFNET.Domain.Entities
         {
             this.PerfisUsuario = new List<PerfilUsuario>();
         }
+        [Key]
         public int IdModulo { get; set; }
         public string NomeModulo { get; set; }
         public string NomeMenuAcesso { get; set; }

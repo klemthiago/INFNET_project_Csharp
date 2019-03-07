@@ -10,6 +10,7 @@ namespace ProjetoINFNET.Infrastructure.Data.Migrations
     {
         public Configuration()
         {
+            AutomaticMigrationDataLossAllowed = true;
             AutomaticMigrationsEnabled = true;
         }
 

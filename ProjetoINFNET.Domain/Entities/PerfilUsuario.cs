@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace ProjetoINFNET.Domain.Entities
             this.Usuarios = new List<Usuario>();
             this.ModulosAcesso = new List<ModulosAcesso>();
         }
+        [Key]
         public int IdPerfilUsuario { get; set; }
         public string PerfilNome { get; set; }
         public DateTime DataCadastro { get; set; }

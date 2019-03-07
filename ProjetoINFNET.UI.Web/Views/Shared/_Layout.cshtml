@@ -70,7 +70,7 @@
                     @if (SessionManager.IsAuthenticated)
                     {
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span>Olá @SessionManager.UsuarioLogado.Nome</a></li>
-                        <li><a href="@Url.Action("Logoff","Account")"><span class="glyphicon glyphicon-log-in"></span>Sair</a></li>
+                        <li><a href="@Url.Action("Logoff","Account")"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
                     } else {
                         <li>@Html.ActionLink("Entrar", "Login", "Account")</li>
                     }
@@ -80,8 +80,10 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+    </div>
+    <div class="container">
         <hr />
-        <footer>
+        <footer class="footer">
             <p>&copy; @DateTime.Now.Year - Thiago P. Klem - Instituto INFNET</p>
         </footer>
     </div>
