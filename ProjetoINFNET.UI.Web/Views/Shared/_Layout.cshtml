@@ -2,10 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title | INFNET</title>
+    <title>@ViewBag.Title - INFNET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -18,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("INFNET", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Projeto DDD", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <div class="nav navbar-nav" style="margin-top:8px;">
@@ -48,11 +47,11 @@
                                             else
                                             {
                                                 <li class="dropdown-submenu">
-                                                    <a tabindex="-1" href="#">@moduloFilho.NomeMenuAcesso</a>
+                                                    <a tabindex="0" href="#">@moduloFilho.NomeMenuAcesso</a>
                                                     <ul class="dropdown-menu">
                                                         @foreach (var moduloNeto in SessionManager.UsuarioLogado.PerfilUsuario.ModulosAcesso.Where(x => x.IdModuloPai == moduloFilho.IdModulo))
                                                         {
-                                                            <li><a tabindex="-1" href="@Url.Content(moduloNeto.UrlMenu)">@moduloNeto.NomeMenuAcesso</a></li>
+                                                            <li><a tabindex="0" href="@Url.Content(moduloNeto.UrlMenu)">@moduloNeto.NomeMenuAcesso</a></li>
                                                         }
 
                                                     </ul>
@@ -69,10 +68,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (SessionManager.IsAuthenticated)
                     {
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Olá @SessionManager.UsuarioLogado.Nome</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Olá @SessionManager.UsuarioLogado.Nome</a></li>
                         <li><a href="@Url.Action("Logoff","Account")"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
-                    } else {
-                        <li>@Html.ActionLink("Entrar", "Login", "Account")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
                     }
                 </ul>
             </div>
@@ -80,11 +81,9 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-    </div>
-    <div class="container">
         <hr />
-        <footer class="footer">
-            <p>&copy; @DateTime.Now.Year - Thiago P. Klem - Instituto INFNET</p>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Thiago P. Klem - Projeto INFNET</p>
         </footer>
     </div>
 
