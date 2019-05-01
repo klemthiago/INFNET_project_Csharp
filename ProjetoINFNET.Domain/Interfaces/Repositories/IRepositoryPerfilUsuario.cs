@@ -10,5 +10,6 @@ namespace ProjetoINFNET.Domain.Interfaces.Repositories
     public interface IRepositoryPerfilUsuario : IRepositoryBase<PerfilUsuario>
     {
         List<Usuario> RetornaUsuariosDoPerfil(int idPerfilUsuario);
+        PerfilUsuario CadastraPerfilUsuario(PerfilUsuario perfil);
     }
 }

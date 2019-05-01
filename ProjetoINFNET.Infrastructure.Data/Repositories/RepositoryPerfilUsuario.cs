@@ -15,5 +15,10 @@ namespace ProjetoINFNET.Infrastructure.Data.Repositories
             var perfil = _contexto.PerfilUsuario.Where(x => x.IdPerfilUsuario == idPerfilUsuario).FirstOrDefault();
             return perfil.Usuarios.ToList();
         }
+
+        public PerfilUsuario CadastraPerfilUsuario(PerfilUsuario perfil)
+        {
+            return _contexto.PerfilUsuario.Add(perfil);
+        }
     }
 }

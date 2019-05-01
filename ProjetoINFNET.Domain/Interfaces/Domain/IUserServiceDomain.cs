@@ -10,5 +10,6 @@ namespace ProjetoINFNET.Domain.Interfaces.Domain
         List<Usuario> RecuperaUsuariosDoPerfil(int IdPerfilUsuario);
         List<PerfilUsuario> RecuperaTodosPerfisAtivos();
         void CadastraUsuario(Usuario usuario);
+        void CadastraPerfilUsuario(PerfilUsuario perfil);
     }
 }

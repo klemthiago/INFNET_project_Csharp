@@ -81,5 +81,40 @@ namespace ProjetoINFNET.UI.Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public ActionResult PerfilRegister()
+        {
+            var viewModel = new PerfilRegisterViewModel();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult PerfilRegister(PerfilRegisterViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
+            var perfisExistentes = _userServiceDomain.RecuperaTodosPerfisAtivos();
+            foreach (var perfil in perfisExistentes)
+            {
+                if (perfil.PerfilNome == viewModel.PerfilNome)
+                {
+                    ModelState.AddModelError("", "Nome de Perfil de Usuário já esta sendo utilizado");
+                    return View(viewModel);
+                }
+            }
+
+            _userServiceDomain.CadastraPerfilUsuario(
+                new Domain.Entities.PerfilUsuario
+                {
+                    PerfilNome = viewModel.PerfilNome,
+                    DataCadastro = DateTime.Now,
+                    FlAdminMaster = false,
+                    FlAtivo = true
+                });
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

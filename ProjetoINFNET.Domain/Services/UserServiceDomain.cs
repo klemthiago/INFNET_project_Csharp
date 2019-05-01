@@ -53,5 +53,19 @@ namespace ProjetoINFNET.Domain.Services
                 throw new ApplicationException(ex.Message);
             }
         }
+
+        public void CadastraPerfilUsuario(PerfilUsuario perfil)
+        {
+            try
+            {
+                IniciarTransacao();
+                _repositoryPerfil.CadastraPerfilUsuario(perfil);
+                PersistirTransacao();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(ex.Message);
+            }
+        }
     }
 }
